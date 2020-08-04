@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BlazorApp1.Data;
+using Microsoft.Extensions.FileProviders;
 
 namespace BlazorApp1
 {
@@ -47,6 +49,16 @@ namespace BlazorApp1
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //Tips: for embedded mode
+            var ass = Assembly.GetEntryAssembly();
+            var resourceAssemblyName = ass.GetName().Name;
+            app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new EmbeddedFileProvider(ass, $"{resourceAssemblyName}.wwwroot"),
+                    RequestPath = "/embeded"
+                }
+            );
 
             app.UseRouting();
 

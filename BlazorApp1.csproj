@@ -4,4 +4,36 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
+    <Content Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+    <Content Remove="wwwroot\css\open-iconic\FONT-LICENSE" />
+    <Content Remove="wwwroot\css\open-iconic\font\css\open-iconic-bootstrap.min.css" />
+    <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.eot" />
+    <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.otf" />
+    <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
+    <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.ttf" />
+    <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.woff" />
+    <Content Remove="wwwroot\css\open-iconic\ICON-LICENSE" />
+    <Content Remove="wwwroot\css\open-iconic\README.md" />
+    <Content Remove="wwwroot\css\site.css" />
+    <Content Remove="wwwroot\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\css\bootstrap\bootstrap.min.css" />
+    <EmbeddedResource Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+    <EmbeddedResource Include="wwwroot\css\open-iconic\FONT-LICENSE" />
+    <EmbeddedResource Include="wwwroot\css\open-iconic\font\css\open-iconic-bootstrap.min.css" />
+    <EmbeddedResource Include="wwwroot\css\open-iconic\font\fonts\open-iconic.eot" />
+    <EmbeddedResource Include="wwwroot\css\open-iconic\font\fonts\open-iconic.otf" />
+    <EmbeddedResource Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
+    <EmbeddedResource Include="wwwroot\css\open-iconic\font\fonts\open-iconic.ttf" />
+    <EmbeddedResource Include="wwwroot\css\open-iconic\font\fonts\open-iconic.woff" />
+    <EmbeddedResource Include="wwwroot\css\open-iconic\ICON-LICENSE" />
+    <EmbeddedResource Include="wwwroot\css\open-iconic\README.md" />
+    <EmbeddedResource Include="wwwroot\css\site.css" />
+    <EmbeddedResource Include="wwwroot\favicon.ico" />
+  </ItemGroup>
+  
 </Project>
