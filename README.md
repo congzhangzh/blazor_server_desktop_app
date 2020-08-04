@@ -1,5 +1,6 @@
 It's a really workable application, just one single standalone exe file, allow to copy and run on any windows 10 computer.
 
+0. It will be single file standalone exe
 1. It's base on .net core 3.1
 2. It's a blazor server side application
 3. It will open you os browser when blazor server started
