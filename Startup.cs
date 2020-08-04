@@ -34,8 +34,7 @@ namespace BlazorApp1
             CancellationToken cancellationToken)
         {
             //circuits.Remove(circuit);
-
-            AppLifetime?.StopApplication();
+            Task.Factory.StartNew(new Action(() => AppLifetime?.StopApplication()));
             return Task.CompletedTask;
         }
 
