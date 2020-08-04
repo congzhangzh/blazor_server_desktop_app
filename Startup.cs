@@ -48,7 +48,7 @@ namespace BlazorApp1
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             //Tips: for embedded mode
