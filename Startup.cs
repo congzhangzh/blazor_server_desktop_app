@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace BlazorApp1
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Microsoft.Extensions.Hosting.IHostApplicationLifetime appLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -67,6 +68,19 @@ namespace BlazorApp1
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+            appLifetime.ApplicationStarted.Register(() => OpenBrowser(
+                app.ServerFeatures.Get<Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>().Addresses.First()));
+
+        }
+
+        //[TODO]
+        private static void OpenBrowser(string url)
+        {
+            Process.Start(
+                new ProcessStartInfo("cmd", $"/c start {url}")
+                {
+                    CreateNoWindow = true
+                });
         }
     }
 }
