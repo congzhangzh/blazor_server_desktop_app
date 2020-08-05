@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using BlazorApp1.Data;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.FileProviders;
+using System.Runtime.InteropServices;
 
 namespace BlazorApp1
 {
@@ -40,7 +41,7 @@ namespace BlazorApp1
 
         //public int ConnectedCircuits => circuits.Count;
 
-        public static TrackingCircuitHandler Instance { get; }=new TrackingCircuitHandler();
+        public static TrackingCircuitHandler Instance { get; } = new TrackingCircuitHandler();
         public Microsoft.Extensions.Hosting.IHostApplicationLifetime AppLifetime;
     }
 
@@ -85,11 +86,11 @@ namespace BlazorApp1
             var ass = Assembly.GetEntryAssembly();
             var resourceAssemblyName = ass.GetName().Name;
             app.UseStaticFiles(new StaticFileOptions
-                {
-                    //[Tips] resourceAssemblyName is something like project name?
-                    FileProvider = new EmbeddedFileProvider(ass, $"{resourceAssemblyName}.wwwroot"),
-                    RequestPath = "/embeded"
-                }
+            {
+                //[Tips] resourceAssemblyName is something like project name?
+                FileProvider = new EmbeddedFileProvider(ass, $"{resourceAssemblyName}.wwwroot"),
+                RequestPath = "/embeded"
+            }
             );
 
             app.UseRouting();
@@ -110,27 +111,22 @@ namespace BlazorApp1
         private static void OpenBrowser(string url)
         {
 
-            //TODO what's the safe way to detect the browser is closed and close the main application manualy?
-            Process.Start(
-                new ProcessStartInfo("cmd", $"/c start {url}")
-                {
-                    CreateNoWindow = true
-                });
-
-
-            // var p = new Process{
-            //     StartInfo = new ProcessStartInfo("cmd", $"/c start {url}")
-            //     {
-            //         CreateNoWindow = true
-            //     }
-            // };
-            // p.Start();
-            //
-            // Task.Factory.StartNew(new Action(() =>
-            // {
-            //     p.WaitForExit();
-            //     System.Environment.Exit(0);
-            // }));
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Process.Start("xdg-open", url);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                Process.Start("open", url);
+            }
+            else
+            {
+                throw new NotImplementedException("Unsupported OS!");
+            }
         }
     }
 }
